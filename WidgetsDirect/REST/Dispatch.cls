@@ -4,7 +4,6 @@ Class REST.Dispatch Extends %CSP.REST
 
 XData UrlMap [ XMLNamespace = "http://www.widgetsdirect.com/urlmap" ]
 {
-
 <Routes>
 <!--<Map Prefix  ="/widget"  Forward="REST.Widget" />-->
 <Route Url="/version" 			Method="GET" 	Call="version" 			Cors="false" />

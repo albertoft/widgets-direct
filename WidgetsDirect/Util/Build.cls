@@ -1,5 +1,6 @@
 /// This class is using %Installer package to build an application
-Class Util.Build {
+Class Util.Build
+{
 
 /// This is a build manifest. Here we describe build steps in XML format.
 XData BuildManifest
@@ -65,7 +66,5 @@ ClassMethod RunBuildManifest(ByRef pVars, pLogLevel As %Integer, pInstaller As %
 	#; Let our XGL document generate code for this method.
 	quit ##class(%Installer.Manifest).%Generate(%compiledclass, %code, "BuildManifest")
 }
-
-
 
 }

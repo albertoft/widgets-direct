@@ -8,49 +8,49 @@ Class UnitTest.Abstract Extends (%UnitTest.TestCase, %CSP.Page)
 
 /// Your test title
 Parameter TITLE As %String;
+
 /// default maximum global accesses for a single row based method call
 /// can overide per class or pur explicitly in each method call
-
 Parameter GlobalsMaxMethod = 100;
+
 /// default maximum global accesses for a query
 /// can overide per class or pur explicitly in each method call
-
 Parameter GlobalsMaxQuery = 1000;
+
 /// Use evaluation methods to test performance 
-
 Property PerformanceTest As %Boolean [ InitialExpression = {..UsePerformanceTest()} ];
-/// This method is used to display a test page.
 
+/// This method is used to display a test page.
 ClassMethod OnPage() As %Status [ ServerOnly = 1 ]
 {
 	lock
 	do ##class(UnitTest.Formatter).Run(..%ClassName(1))
 	quit $$$OK
 }
-/// Run this specific test (in debug mode)
 
+/// Run this specific test (in debug mode)
 ClassMethod Run(qualifiers As %String = "") As %Status [ ProcedureBlock = 1 ]
 {
 	set sc=##class(UnitTest.Manager).RunTest(..%ClassName(1),"/recursive=0"_qualifiers)
 	quit sc
 }
-/// Run this test and all its children
 
+/// Run this test and all its children
 ClassMethod RunRecursive(qualifiers As %String = "") As %Status [ ProcedureBlock = 1 ]
 {
 	set sc=##class(UnitTest.Manager).RunTest(..%ClassName(1),"/recursive=1"_qualifiers)
 	quit sc
 }
-/// Execute expression using current object's context
 
+/// Execute expression using current object's context
 Method Execute(expr) As %String
 {
 	new %result
 	xecute "s %result="_expr
 	quit %result
 }
-/// Log execution HTML result. Now it is stored as a log message.
 
+/// Log execution HTML result. Now it is stored as a log message.
 Method LogResult(result)
 {
 	set oldDisplay=..Manager.Display
@@ -59,9 +59,9 @@ Method LogResult(result)
 	set ..Manager.Display=oldDisplay
 	quit
 }
+
 /// Get last test result instance id, dateTime, status, duration and HTML
 /// All this information is stored in ^UnitTest.Result
-
 ClassMethod GetLastResult(ByRef dateTime, ByRef status, ByRef duration, ByRef html, ByRef suite) As %String [ ProcedureBlock = 1 ]
 {
 	set (dateTime,status,duration,html,suite)=""
@@ -140,12 +140,12 @@ Method AssertFilesSameViaMacro(autoquoted, file1, file2, description) As %Boolea
 	if 'success quit $$$ERROR(5001,description_": "_file1_"!="_file2_" in "_autoquoted)
 	quit $$$OK
 }
+
 /// Run a class method and:
 /// 1. compare the result against an expected value, this can be a single value "A" or a list $lb("A","B","C")
 /// 2. compare the global count against an expected maximum
 /// itmid can uniquely identify a specific test in list within a test method e.g. #1.1,   #1.2  etc
 /// output informative information about the code that was run, the actual value and the expected value
-
 Method StringEquals(itmid, expectedvalue, globalsmax, classname, methodname, args...) As %Status [ Final ]
 {
 	if +$get(globalsmax)=0 set globalsmax=..#GlobalsMaxMethod
@@ -186,13 +186,13 @@ Method StringEquals(itmid, expectedvalue, globalsmax, classname, methodname, arg
 	//less than or equals
 	if ..PerformanceTest do $$$AssertTrue(pGlobals'>globalsmax,"##Class("_classname_")."_methodname_"("_argsdisplay_") ["_itmid_"] Global Count: '"_pGlobals_"' Expected: '<="_globalsmax_"'")
 }
+
 /// Run a class query and:
 /// 1. compare the result against an expected value, this is a list of lists (one list per expected row)
 ///   the comaprison will only check up to the first five rows returned
 /// 2. compare the global count against an expected maximum
 /// itmid can uniquely identify a specific test in list within a test method e.g. #1.1,   #1.2  etc
 /// output informative information about the code that was run, the actual value and the expected value
-
 Method QueryEquals(itmid, expectedvalue, globalsmax, classname, queryname, args...) As %Status [ Final ]
 {
 	if +$get(globalsmax)=0 set globalsmax=..#GlobalsMaxQuery
@@ -244,8 +244,8 @@ Method QueryEquals(itmid, expectedvalue, globalsmax, classname, queryname, args.
 	//less than or equals
 	if ..PerformanceTest do $$$AssertTrue(pGlobals'>globalsmax,"##Class("_classname_")."_queryname_"("_argsdisplay_") ["_itmid_"] Global Count: '"_pGlobals_"' Expected: '<="_globalsmax_"'")
 }
-/// output formatter to display a List of lists
 
+/// output formatter to display a List of lists
 ClassMethod ListOfListToDisplay(listoflist) As %String [ Final ]
 {
 	if '$listvalid(listoflist) quit listoflist

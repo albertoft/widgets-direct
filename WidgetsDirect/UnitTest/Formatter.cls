@@ -4,7 +4,6 @@ Include %occInclude
 Class UnitTest.Formatter [ Abstract ]
 {
 
-
 /// This method is used to display a page.
 ClassMethod Run(pClassName As %String) As %Status [ PublicList = Result ]
 {
@@ -166,8 +165,8 @@ ClassMethod GetTitle(pClassName) As %String
 	if title="" set title=pClassName
 	quit title
 }
-/// Display children
 
+/// Display children
 ClassMethod DisplayChildren(pClassName) As %Status
 {
 	set pointCount=$length(pClassName,".")
@@ -182,8 +181,8 @@ ClassMethod DisplayChildren(pClassName) As %Status
 	if childStr'="" write "<h2>More details: </h2>"_childStr
 	quit $$$OK
 }
-/// Output CSS stules for page
 
+/// Output CSS stules for page
 ClassMethod DisplayStyles() As %Status
 {
 	&html<
@@ -308,8 +307,8 @@ ClassMethod DisplayStyles() As %Status
 		}
 		</style>>
 }
-/// Output CSS stules for page
 
+/// Output CSS stules for page
 ClassMethod DisplayJS() As %Status
 {
 	&html<

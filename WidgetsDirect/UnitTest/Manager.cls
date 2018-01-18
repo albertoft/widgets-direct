@@ -2,6 +2,7 @@
 /// The main goal is not to use filesystem for testing and use class definitions instead
 Class UnitTest.Manager Extends %UnitTest.Manager
 {
+
 /// Same as <b>RunTest</b>, but requires three arguments.  These arguments can be null, as ("","","").
 ClassMethod RunTestSuites(testspec As %String = "", qspec As %String = "", userparam As %String = "") As %Status
 {

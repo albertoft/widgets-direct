@@ -10,7 +10,7 @@ Property Price As %Currency;
 
 Property Quantity As %Integer;
 
-Property Deleted as %Boolean;
+Property Deleted As %Boolean;
 
 Relationship Accessories As User.WidgetAccessoryLink [ Cardinality = many, Inverse = Widget ];
 
