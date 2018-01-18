@@ -4,7 +4,6 @@ node {
         checkout scm
         app  = docker.build("widgetsdirect", "WidgetsDirect")
         
-    /*    
     stage "Test and validate"
         app.inside('-u root') {
             sh "echo Testing..."
@@ -14,5 +13,4 @@ node {
 			sh "ccontrol stop CACHE quietly"
             junit "test.xml"
         }
-	*/
 }
