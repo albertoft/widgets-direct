@@ -8,9 +8,9 @@ node {
         app.inside('-u root') {
             sh "echo Testing..."
             sh 'printf "_system\nSYS\n zn \\"WidgetsDirect\\" do ##class(UnitTest.Widget).RunRecursive() do ##class(UnitTest.Manager).OutputResultsXml(\\"${WORKSPACE}/test.xml\\") halt" >temp.cmd'
-			sh "ccontrol start CACHE"
-            sh "csession CACHE <temp.cmd"
-			sh "ccontrol stop CACHE quietly"
+			sh "ccontrol start IRIS"
+            sh "csession IRIS <temp.cmd"
+			sh "ccontrol stop IRIS quietly"
             junit "test.xml"
         }
 }
