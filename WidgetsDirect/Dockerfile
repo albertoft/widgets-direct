@@ -1,7 +1,4 @@
-#FROM docker.iscinternal.com:5000/2018.1.0/isc-idp:2018.1.0.289.0
-#FROM intersystems/isc-iris:gs2017
 FROM intersystems/iris:stable
-LABEL maintainer "sylvain.guilbaud@intersystems.com"
 ARG ISC_PACKAGE_USER_PASSWORD
 ARG ISC_PACKAGE_CSPSYSTEM_PASSWORD
 ENV TMP_INSTALL_DIR="/tmp/install" \
